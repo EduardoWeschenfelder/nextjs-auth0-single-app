@@ -1,6 +1,8 @@
 import Head from "next/head";
 
 export default function Home() {
+  console.log(process.env.AUTH0_DOMAIN);
+
   return (
     <div className="container">
       <Head>
@@ -8,6 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <a href="api/login">Login</a>
+      <a href="/api/logout">Logout</a>
       <main>
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
