@@ -1,57 +1,63 @@
 import Head from "next/head";
 import auth0 from "../utils/auth0";
-console.log(process.env);
-
+import react from 'react'
 function Home(props) {
-  console.log(props);
-
+  console.log(props)
   return (
     <div className="container">
       <Head>
-        <title>Simple App Auth0</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Simple App Auth0 </title>
+        < link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="http://localhost:3000/">Auth0!</a>
+        <h1 className="title" >
+          Welcome to <a href="http://localhost:3000/" > Auth0! </a>
         </h1>
+        {
+          props?.session?.user ? (
+            <p className="description" > Faça logout á baixo </p>
+          ) : (
+              <p className="description" > Faça login á baixo </p>
+            )
+        }
 
-        <p className="description">Faça login á baixo</p>
-
-        {props?.session?.user ? (
-          <a
-            style={{
-              backgroundColor: "red",
-              padding: "15px 30px",
-              color: "#fff",
-              borderRadius: "8px",
-            }}
-            href="/api/logout"
-          >
-            Logout
-          </a>
-        ) : (
-          <a
-            style={{
-              backgroundColor: "green",
-              padding: "15px 30px",
-              color: "#fff",
-              borderRadius: "8px",
-            }}
-            href="/api/login"
-          >
-            Login
-          </a>
-        )}
+        {
+          props?.session?.user ? (
+            <a
+              style={{
+                backgroundColor: "red",
+                padding: "15px 30px",
+                color: "#fff",
+                borderRadius: "8px",
+              }
+              }
+              href="/api/logout"
+            >
+              Logout
+            </a>
+          ) : (
+              <a
+                style={{
+                  backgroundColor: "green",
+                  padding: "15px 30px",
+                  color: "#fff",
+                  borderRadius: "8px",
+                }
+                }
+                href="/api/login"
+              >
+                Login
+              </a>
+            )}
         {/* <a href="/api/me">Profile</a> */}
       </main>
 
-      <footer>
-        <p> © 2020 Eduardo</p>
+      < footer >
+        <p> © 2020 Eduardo </p>
       </footer>
 
-      <style jsx>{`
+      < style jsx > {`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -135,7 +141,7 @@ function Home(props) {
         }
       `}</style>
 
-      <style jsx global>{`
+      < style jsx global > {`
         html,
         body {
           padding: 0;
@@ -152,18 +158,14 @@ function Home(props) {
     </div>
   );
 }
-export async function getServerSideProps({ req }) {
-  console.log("REQ", req);
-
+export async function getServerSideProps({ req, res }) {
   const session = await auth0.getSession(req);
   console.log({ session });
+  const tokenCache = await auth0.tokenCache(req, res);
+  // const { accessToken } = await tokenCache.getAccessToken();
+  console.log({ tokenCache });
+
   return { props: { session } };
 }
-
-// Home.getInitialProps = async ({ req }) => {
-//   console.log("REQ", req);
-//   const session = await auth0.getSession(req);
-//   return { props: { session } };
-// };
 
 export default Home;
