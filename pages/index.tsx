@@ -16,7 +16,10 @@ function Home(props) {
         </h1>
         {
           props?.session?.user ? (
-            <p className="description" > Faça logout á baixo </p>
+            <p className="description" >
+              <br /><strong>Usuario:</strong> {[props?.session?.user.nickname]}
+              <br /><strong>Email:</strong> {[props?.session?.user.name]}
+            </p>
           ) : (
               <p className="description" > Faça login á baixo </p>
             )
