@@ -6,17 +6,13 @@ function Home(props) {
   return (
     <div className="container">
       <Head>
-        <title>Simple App Auth0 </title>
+        <title>Demo_Single </title>
         < link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title" >
-
           Welcome to <a href="http://localhost:3000/" > Auth0! Demo_Single </a>
-
-          Welcome to <a href="http://localhost:3002/" > Auth0! Demo_Regular </a>
-
         </h1>
         {
           props?.session?.user ? (
