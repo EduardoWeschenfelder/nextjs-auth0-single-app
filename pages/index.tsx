@@ -1,6 +1,6 @@
 import Head from "next/head";
 import auth0 from "../utils/auth0";
-import react from 'react'
+
 function Home(props) {
   console.log(props)
   return (
